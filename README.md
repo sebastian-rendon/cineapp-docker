@@ -11,3 +11,10 @@ docker compose up
 ```
 
 Accede en: http://localhost
+
+## Credenciales de prueba
+
+| Campo | Valor |
+|---|---|
+| Correo | admin@cineapp.com |
+| Contraseña | admin123 |
