@@ -1,0 +1,49 @@
+version: "3.8"
+
+services:
+
+  db:
+    image: mysql:8.0
+    container_name: cineapp_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: cineapp2026
+      MYSQL_DATABASE: ott_mvp
+    volumes:
+      - ./init:/docker-entrypoint-initdb.d
+      - db_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-pcineapp2026"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    image: sebastianrendon/cineapp-backend:latest
+    container_name: cineapp_backend
+    restart: always
+    environment:
+      DB_HOST: db
+      DB_USER: root
+      DB_PASSWORD: cineapp2026
+      DB_NAME: ott_mvp
+      SECRET_KEY: cineapp_secret_2026
+    ports:
+      - "5000:5000"
+    depends_on:
+      db:
+        condition: service_healthy
+
+  frontend:
+    image: sebastianrendon/cineapp-frontend:latest
+    container_name: cineapp_frontend
+    restart: always
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+
+volumes:
+  db_data:
