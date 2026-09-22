@@ -20,9 +20,6 @@ services:
 
   backend:
     image: sebastianrendon/cineapp-backend:latest
-    build:
-      context: ../OTT-MVP/backend
-      dockerfile: Dockerfile
     container_name: cineapp_backend
     restart: always
     environment:
@@ -30,7 +27,7 @@ services:
       DB_USER: root
       DB_PASSWORD: cineapp2026
       DB_NAME: ott_mvp
-      SECRET_KEY: cineapp_secret_2026
+      SECRET_KEY: cineapp_secret_2026_paradigmas_ott
     ports:
       - "5000:5000"
     depends_on:
@@ -39,9 +36,6 @@ services:
 
   frontend:
     image: sebastianrendon/cineapp-frontend:latest
-    build:
-      context: ../OTT-MVP/frontend
-      dockerfile: Dockerfile
     container_name: cineapp_frontend
     restart: always
     ports:
