@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>StreamHub — Home</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/styles.css">
+</head>
+<body class="home-body">
+
+<div class="scene" aria-hidden="true">
+    <div class="scene__glow"></div>
+    <div class="scene__beam"></div>
+    <div class="scene__grain"></div>
+</div>
+
+<header class="home-header glass-panel" id="site-header">
+    <div class="home-header__left">
+    <a href="home.html" class="brand">
+        <span class="brand__mark" aria-hidden="true"></span>
+        <span class="brand__logo">Stream<span class="brand__accent">Hub</span></span>
+    </a>
+    <nav class="home-nav" aria-label="principal">
+        <button class="btn-home-nav is-active" id="btn-home" type="button">Inicio</button>
+        <button class="btn-home-nav" id="btn-favs" type="button">Favoritos</button>
+    </nav>
+    </div>
+
+    <div class="home-header__center">
+    <label class="home-search" for="search">
+        <span class="home-search__icon" aria-hidden="true"></span>
+        <input id="search" class="field-input" type="search" placeholder="Buscar títulos, géneros, actores..." aria-label="Buscar">
+    </label>
+    </div>
+
+    <div class="home-header__right">
+    <span class="home-user-pill" id="user-pill">Hola, usuario</span>
+    <button class="btn-home-nav btn-home-nav--ghost" id="btn-profile" type="button">Perfil</button>
+    <button class="btn-home-nav btn-home-nav--ghost" id="btn-logout" type="button">Cerrar sesión</button>
+    </div>
+</header>
+
+<main id="main" class="home-main">
+    <section id="hero" class="home-hero" aria-label="Destacado"></section>
+    <section id="rows" class="home-rows"></section>
+</main>
+
+<script src="../js/api.js"></script>
+<script src="../js/home.js"></script>
+</body>
+</html>

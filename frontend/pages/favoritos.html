@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>StreamHub — Favoritos</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body class="favorites-body">
+  <div class="scene" aria-hidden="true">
+    <div class="scene__glow"></div>
+    <div class="scene__beam"></div>
+    <div class="scene__grain"></div>
+  </div>
+
+  <header class="favorites-header glass-panel">
+    <a href="home.html" class="brand favorites-header__brand">
+      <span class="brand__mark" aria-hidden="true"></span>
+      <span class="brand__logo">Stream<span class="brand__accent">Hub</span></span>
+    </a>
+
+    <div class="favorites-header__actions">
+      <a class="btn-home-nav" href="home.html">Inicio</a>
+      <a class="btn-home-nav btn-home-nav--ghost" href="reproductor.html">Reproducir</a>
+    </div>
+  </header>
+
+  <main class="favorites-shell">
+    <section class="favorites-hero glass-panel">
+      <div>
+        <p class="favorites-eyebrow">Tu biblioteca</p>
+        <h1>Favoritos</h1>
+        <p>Guarda tus películas favoritas y accede a ellas cuando quieras.</p>
+      </div>
+    </section>
+
+    <section class="favorites-grid" id="favorites-list"></section>
+  </main>
+
+  <script src="../js/api.js"></script>
+  <script src="../js/favoritos.js"></script>
+</body>
+</html>

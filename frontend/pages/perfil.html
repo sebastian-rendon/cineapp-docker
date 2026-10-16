@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>StreamHub — Perfil</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/styles.css">
+</head>
+<body class="profile-body">
+<div class="scene" aria-hidden="true">
+    <div class="scene__glow"></div>
+    <div class="scene__beam"></div>
+    <div class="scene__grain"></div>
+</div>
+
+<header class="profile-header glass-panel">
+    <a href="home.html" class="brand profile-header__brand">
+    <span class="brand__mark" aria-hidden="true"></span>
+    <span class="brand__logo">Stream<span class="brand__accent">Hub</span></span>
+    </a>
+
+    <div class="profile-header__actions">
+    <a class="btn-home-nav" href="home.html">Inicio</a>
+    <a class="btn-home-nav btn-home-nav--ghost" href="favoritos.html">Favoritos</a>
+    </div>
+</header>
+
+<main class="profile-shell">
+    <section class="profile-card glass-panel">
+    <div class="profile-card__hero">
+        <div class="profile-avatar">U</div>
+        <div>
+        <p class="profile-eyebrow">Mi cuenta</p>
+        <h1 id="profile-name">Usuario</h1>
+        <p class="profile-subtitle" id="profile-email">usuario@streamhub.com</p>
+        </div>
+    </div>
+
+    <div class="profile-stats">
+        <div class="profile-stat">
+        <strong id="profile-plan">Plan Básico</strong>
+        <span>Suscripción</span>
+        </div>
+        <div class="profile-stat">
+        <strong id="profile-region">Colombia</strong>
+        <span>Región</span>
+        </div>
+        <div class="profile-stat">
+        <strong id="profile-watchtime">0h</strong>
+        <span>Tiempo visto</span>
+        </div>
+    </div>
+    </section>
+
+    <section class="profile-details">
+    <div class="profile-panel glass-panel">
+        <h2>Información personal</h2>
+        <div class="profile-info-list">
+        <div class="profile-info-item">
+            <span>Nombre</span>
+            <strong id="profile-name-detail">Usuario</strong>
+        </div>
+        <div class="profile-info-item">
+            <span>Correo</span>
+            <strong id="profile-email-detail">usuario@streamhub.com</strong>
+        </div>
+        <div class="profile-info-item">
+            <span>Idioma</span>
+            <strong>Español</strong>
+        </div>
+        </div>
+    </div>
+
+    <div class="profile-panel glass-panel">
+        <h2>Preferencias</h2>
+        <div class="profile-tags">
+        <span class="profile-tag">Ciencia ficción</span>
+        <span class="profile-tag">Drama</span>
+        <span class="profile-tag">Acción</span>
+        <span class="profile-tag">Documentales</span>
+        </div>
+        <button class="btn-primary profile-btn" type="button">Editar preferencias</button>
+    </div>
+    </section>
+</main>
+
+<script src="../js/api.js"></script>
+<script src="../js/perfil.js"></script>
+</body>
+</html>
