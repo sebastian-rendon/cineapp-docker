@@ -18,47 +18,47 @@ from routes.cerrar_sesion_routes import cerrar_sesion_bp
 from routes.perfil import perfil_bp
 
 app = Flask(__name__)
-CORS(app, origins=*, supports_credentials=True)
+CORS(app, origins="*", supports_credentials=True)
 
-# Configuración de Swagger / OpenAPI
+# Configuracion de Swagger / OpenAPI
 swagger_config = {
-    headers: [],
-    specs: [
+    "headers": [],
+    "specs": [
         {
-            endpoint: apispec,
-            route: /apispec.json,
-            rule_filter: lambda rule: True,
-            model_filter: lambda model: True,
+            "endpoint": "apispec",
+            "route": "/apispec.json",
+            "rule_filter": lambda rule: True,
+            "model_filter": lambda model: True,
         }
     ],
-    static_url_path: /flasgger_static,
-    swagger_ui: True,
-    specs_route: /apidocs/
+    "static_url_path": "/flasgger_static",
+    "swagger_ui": True,
+    "specs_route": "/apidocs/"
 }
 
 swagger_template = {
-    swagger: 2.0,
-    info: {
-        title: CineApp - OTT MVP API,
-        description: Documentación interactiva de la API con OpenAPI / Swagger para CineApp StreamHub OTT.,
-        contact: {
-            name: Equipo de Desarrollo CineApp,
-            email: valeriabolnoy@gamil.com
+    "swagger": "2.0",
+    "info": {
+        "title": "CineApp - OTT MVP API",
+        "description": "Documentacion interactiva de la API con OpenAPI / Swagger para CineApp StreamHub OTT.",
+        "contact": {
+            "name": "Equipo de Desarrollo CineApp",
+            "email": "valeriabolnoy@gmail.com"
         },
-        version: 1.0.0
+        "version": "1.0.0"
     },
-    host: localhost:5000,
-    basePath: /,
-    schemes: [
-        http,
-        https
+    "host": "localhost:5000",
+    "basePath": "/",
+    "schemes": [
+        "http",
+        "https"
     ],
-    securityDefinitions: {
-        Bearer: {
-            type: apiKey,
-            name: Authorization,
-            in: header,
-            description: Token de autenticación JWT. Formato requerido: 'Bearer <tu_token_aqui>'
+    "securityDefinitions": {
+        "Bearer": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header",
+            "description": "Token de autenticacion JWT. Formato requerido: 'Bearer <tu_token_aqui>'"
         }
     }
 }
@@ -68,7 +68,7 @@ swagger = Swagger(app, config=swagger_config, template=swagger_template)
 # Registro de Blueprints
 app.register_blueprint(regiones_bp)
 app.register_blueprint(auth_bp)
-app.register_blueprint(perfil_bp)   
+app.register_blueprint(perfil_bp)
 app.register_blueprint(recuperar_contrasena_bp)
 app.register_blueprint(categoria_bp)
 app.register_blueprint(busqueda_bp)
@@ -82,9 +82,10 @@ app.register_blueprint(seguir_viendo_bp)
 app.register_blueprint(cerrar_sesion_bp)
 
 
-@app.route(/)
+@app.route("/")
 def inicio():
-    "Endpoint Hola Mundo y Estado de Salud del Backend
+    """
+    Endpoint Hola Mundo y Estado de Salud del Backend
     ---
     tags:
       - Estado y Salud
@@ -103,13 +104,13 @@ def inicio():
             version:
               type: string
               example: 1.0.0
-    "
+    """
     return {
-        mensaje: Backend OTT - Hola Mundo funcionando correctamente,
-        status: ok,
-        version: 1.0.0
+        "mensaje": "Backend OTT - Hola Mundo funcionando correctamente",
+        "status": "ok",
+        "version": "1.0.0"
     }
 
 
-if __name__ == __main__:
-    app.run(host=0.0.0.0, port=5000, debug=True)
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5000, debug=True)

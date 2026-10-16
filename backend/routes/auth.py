@@ -1,15 +1,15 @@
 ﻿from flask import Blueprint, request
 from services.auth_service import registrar_usuario, iniciar_sesion
 
-auth_bp = Blueprint(auth, __name__)
+auth_bp = Blueprint("auth", __name__)
 
 
-@auth_bp.route(/registro, methods=[POST])
+@auth_bp.route("/registro", methods=["POST"])
 def registro():
-    "Registro de nuevo usuario
+    """Registro de nuevo usuario
     ---
     tags:
-      - Autenticación
+      - Autenticacion
     parameters:
       - in: body
         name: body
@@ -20,7 +20,7 @@ def registro():
             - nombre
             - apellido
             - correo
-            - contraseña
+            - contrasena
             - region_id
           properties:
             nombre:
@@ -32,7 +32,7 @@ def registro():
             correo:
               type: string
               example: usuario@cineapp.com
-            contraseña:
+            contrasena:
               type: string
               example: password123
             region_id:
@@ -42,15 +42,15 @@ def registro():
       200:
         description: Usuario registrado exitosamente
       400:
-        description: Parámetros inválidos o usuario ya existente
-    "
+        description: Parametros invalidos o usuario ya existente
+    """
     datos = request.get_json()
 
-    nombre = datos.get(nombre)
-    apellido = datos.get(apellido)
-    correo = datos.get(correo)
-    contraseña = datos.get(contraseña)
-    region_id = datos.get(region_id)
+    nombre = datos.get("nombre")
+    apellido = datos.get("apellido")
+    correo = datos.get("correo")
+    contraseña = datos.get("contraseña")
+    region_id = datos.get("region_id")
 
     respuesta = registrar_usuario(
         nombre,
@@ -63,12 +63,12 @@ def registro():
     return respuesta
 
 
-@auth_bp.route(/login, methods=[POST])
+@auth_bp.route("/login", methods=["POST"])
 def login():
-    "Inicio de sesión y entrega de Token JWT
+    """Inicio de sesion y entrega de Token JWT
     ---
     tags:
-      - Autenticación
+      - Autenticacion
     parameters:
       - in: body
         name: body
@@ -77,17 +77,17 @@ def login():
           type: object
           required:
             - correo
-            - contraseña
+            - contrasena
           properties:
             correo:
               type: string
               example: admin@cineapp.com
-            contraseña:
+            contrasena:
               type: string
               example: admin123
     responses:
       200:
-        description: Autenticación exitosa
+        description: Autenticacion exitosa
         schema:
           type: object
           properties:
@@ -108,11 +108,11 @@ def login():
                   example: admin@cineapp.com
       401:
         description: Credenciales incorrectas
-    "
+    """
     datos = request.get_json()
 
-    correo = datos.get(correo)
-    contraseña = datos.get(contraseña)
+    correo = datos.get("correo")
+    contraseña = datos.get("contraseña")
 
     respuesta = iniciar_sesion(
         correo,

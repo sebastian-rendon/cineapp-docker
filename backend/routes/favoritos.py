@@ -2,13 +2,13 @@
 from middleware.auth_middleware import token_requerido
 from services.favoritos_service import (agregar_favorito, obtener_favoritos, eliminar_favorito)
 
-favoritos_bp = Blueprint(favoritos, __name__)
+favoritos_bp = Blueprint("favoritos", __name__)
 
 
-@favoritos_bp.route(/favoritos, methods=[POST])
+@favoritos_bp.route("/favoritos", methods=["POST"])
 @token_requerido
 def favoritos():
-    "Agregar un contenido a favoritos
+    """Agregar un contenido a favoritos
     ---
     tags:
       - Favoritos
@@ -31,18 +31,18 @@ def favoritos():
         description: Contenido agregado a favoritos
       401:
         description: No autorizado
-    "
+    """
     datos = request.get_json()
-    contenido_id = datos.get(contenido_id)
-    usuario_id = request.usuario[usuario_id]
+    contenido_id = datos.get("contenido_id")
+    usuario_id = request.usuario["usuario_id"]
 
     return agregar_favorito(usuario_id, contenido_id)
 
 
-@favoritos_bp.route(/favoritos, methods=[GET])
+@favoritos_bp.route("/favoritos", methods=["GET"])
 @token_requerido
 def listar_favoritos():
-    "Listar contenidos favoritos del usuario
+    """Listar contenidos favoritos del usuario
     ---
     tags:
       - Favoritos
@@ -53,15 +53,15 @@ def listar_favoritos():
         description: Lista de favoritos
       401:
         description: No autorizado
-    "
-    usuario_id = request.usuario[usuario_id]
+    """
+    usuario_id = request.usuario["usuario_id"]
     return obtener_favoritos(usuario_id)
 
 
-@favoritos_bp.route(/favoritos/<int:contenido_id>, methods=[DELETE])
+@favoritos_bp.route("/favoritos/<int:contenido_id>", methods=["DELETE"])
 @token_requerido
 def borrar_favorito(contenido_id):
-    "Eliminar un contenido de favoritos
+    """Eliminar un contenido de favoritos
     ---
     tags:
       - Favoritos
@@ -78,6 +78,6 @@ def borrar_favorito(contenido_id):
         description: Favorito eliminado
       401:
         description: No autorizado
-    "
-    usuario_id = request.usuario[usuario_id]
+    """
+    usuario_id = request.usuario["usuario_id"]
     return eliminar_favorito(usuario_id, contenido_id)

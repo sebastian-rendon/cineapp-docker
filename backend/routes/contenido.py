@@ -5,13 +5,13 @@ from services.contenido_service import (
     obtener_contenido_por_region
 )
 
-contenido_bp = Blueprint(contenido, __name__)
+contenido_bp = Blueprint("contenido", __name__)
 
 
-@contenido_bp.route(/contenido, methods=[GET])
+@contenido_bp.route("/contenido", methods=["GET"])
 @token_requerido
 def contenido():
-    "Obtener catálogo completo de contenidos multimedia
+    """Obtener catalogo completo de contenidos multimedia
     ---
     tags:
       - Contenido
@@ -19,17 +19,17 @@ def contenido():
       - Bearer: []
     responses:
       200:
-        description: Lista de películas y series disponibles
+        description: Lista de peliculas y series disponibles
       401:
-        description: Token inválido o no proporcionado
-    "
+        description: Token invalido o no proporcionado
+    """
     return obtener_contenido()
 
 
-@contenido_bp.route(/contenido/region, methods=[GET])
+@contenido_bp.route("/contenido/region", methods=["GET"])
 @token_requerido
 def contenido_region():
-    "Obtener contenido según la región del usuario autenticado
+    """Obtener contenido segun la region del usuario autenticado
     ---
     tags:
       - Contenido
@@ -37,9 +37,9 @@ def contenido_region():
       - Bearer: []
     responses:
       200:
-        description: Contenido disponible para la región
+        description: Contenido disponible para la region
       401:
-        description: Token no válido
-    "
-    usuario_id = request.usuario[usuario_id]
+        description: Token no valido
+    """
+    usuario_id = request.usuario["usuario_id"]
     return obtener_contenido_por_region(usuario_id)
