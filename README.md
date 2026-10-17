@@ -18,11 +18,13 @@ Repositorio de despliegue y desarrollo monorepo de la plataforma OTT **StreamHub
 
 ## 📥 Cómo Descargar el Proyecto
 
-### Opción 1: Clonar el Repositorio (Código fuente y despliegue)
+### Opción 1: Clonar el Repositorio con submódulos (Código fuente y despliegue)
 ```bash
-git clone https://github.com/valbolnoy/cineapp-docker.git
+git clone --recurse-submodules https://github.com/sebastian-rendon/cineapp-docker.git
 cd cineapp-docker
 ```
+
+> **Nota:** El flag `--recurse-submodules` clona automáticamente el código fuente del backend y frontend desde el repositorio [OTT-MVP-1](https://github.com/sebastian-rendon/OTT-MVP-1).
 
 ### Opción 2: Descargar las Imágenes directamente desde DockerHub
 Si prefieres no compilar el código y usar las imágenes oficiales en DockerHub:
@@ -96,9 +98,14 @@ docker compose down
 
 Para verificar la comunicación entre los tres componentes (**Frontend ↔ Backend ↔ Base de Datos**) y correr la suite de pruebas automatizadas, consulta la guía detallada en: **[FLUJO_DE_PRUEBA.md](./FLUJO_DE_PRUEBA.md)**
 
-Para ejecutar la suite de pruebas automatizadas:
+Para ejecutar la suite de pruebas unitarias (requiere `docker compose up` activo):
 ```bash
-python backend/tests/test_flujo_completo.py
+python backend/backend/tests/test_flujo_completo.py
+```
+
+Para ejecutar las pruebas de Playwright (requiere `docker compose up` activo):
+```bash
+docker compose --profile testing run playwright
 ```
 
 ---
@@ -108,24 +115,35 @@ python backend/tests/test_flujo_completo.py
 ```text
 cineapp-docker/
 ├── docker-compose.yml          # Orquestación de servicios (db, backend, frontend)
+├── playwright.config.js        # Configuración de pruebas Playwright
 ├── FLUJO_DE_PRUEBA.md          # Documentación del flujo de prueba E2E
+├── HISTORIAS_USUARIO.md        # Historias de usuario con responsables asignados
 ├── README.md                   # Documentación principal del proyecto
 ├── init/                       # Scripts de inicialización de Base de Datos
 │   ├── 01_schema.sql           # Esquema de tablas y relaciones
 │   └── 02_seed.sql             # Datos iniciales (usuarios, catálogo, regiones)
-├── backend/                    # Proyecto Backend (Flask API)
-│   ├── Dockerfile              # Empaquetado Docker de Backend
-│   ├── .dockerignore           # Exclusiones de build Docker
-│   ├── app.py                  # Punto de entrada y configuración de Swagger
-│   ├── requirements.txt        # Dependencias Python
-│   ├── routes/                 # Endpoints REST documentados con OpenAPI
-│   ├── services/               # Lógica de negocio y consultas MySQL
-│   └── tests/                  # Suite de pruebas automatizadas
-└── frontend/                   # Proyecto Frontend (Web SPA)
-    ├── Dockerfile              # Empaquetado Docker de Frontend (Nginx)
-    ├── .dockerignore           # Exclusiones de build Docker
-    ├── nginx.conf              # Configuración de Nginx
-    ├── pages/                  # Vistas HTML (login, catálogo, reproductor)
-    ├── js/                     # Lógica JavaScript y consumo de API
-    └── css/                    # Estilos visuales
+└── backend/                    # Submódulo Git → OTT-MVP-1
+    ├── backend/                # Código fuente del Backend (Flask API)
+    │   ├── Dockerfile          # Empaquetado Docker de Backend
+    │   ├── app.py              # Punto de entrada y configuración de Swagger
+    │   ├── requirements.txt    # Dependencias Python
+    │   ├── routes/             # Endpoints REST documentados con OpenAPI
+    │   ├── services/           # Lógica de negocio y consultas MySQL
+    │   └── tests/              # Suite de pruebas unitarias
+    └── frontend/               # Código fuente del Frontend (Web SPA)
+        ├── Dockerfile          # Empaquetado Docker de Frontend (Nginx)
+        ├── nginx.conf          # Configuración de Nginx
+        ├── pages/              # Vistas HTML (login, catálogo, reproductor)
+        ├── js/                 # Lógica JavaScript y consumo de API
+        ├── css/                # Estilos visuales
+        └── tests/              # Suite de pruebas Playwright
 ```
+
+---
+
+## 🔗 Repositorios
+
+| Repositorio | Descripción |
+|---|---|
+| [cineapp-docker](https://github.com/sebastian-rendon/cineapp-docker) | Monorepo principal — despliegue y orquestación |
+| [OTT-MVP-1](https://github.com/sebastian-rendon/OTT-MVP-1) | Código fuente de backend y frontend (submódulo) |
