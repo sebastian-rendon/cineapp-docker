@@ -49,5 +49,20 @@
     depends_on:
       - backend
 
+  playwright:
+    image: mcr.microsoft.com/playwright:v1.40.0-jammy
+    container_name: cineapp_playwright
+    working_dir: /app
+    volumes:
+      - ./frontend/tests:/app/tests
+      - ./playwright.config.js:/app/playwright.config.js
+    command: npx playwright test
+    network_mode: host
+    depends_on:
+      - frontend
+      - backend
+    profiles:
+      - testing
+
 volumes:
   db_data:
