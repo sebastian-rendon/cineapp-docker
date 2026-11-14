@@ -4,7 +4,7 @@ Repositorio de despliegue y desarrollo monorepo de la plataforma OTT **StreamHub
 
 ---
 
-## 🛠 Tecnologías y Versiones
+## Tecnologías y Versiones
 
 | Componente | Tecnología | Versión | Descripción |
 |---|---|---|---|
@@ -16,7 +16,7 @@ Repositorio de despliegue y desarrollo monorepo de la plataforma OTT **StreamHub
 
 ---
 
-## 📥 Cómo Descargar el Proyecto
+## Cómo Descargar el Proyecto
 
 ### Opción 1: Clonar el Repositorio con submódulos (Código fuente y despliegue)
 ```bash
@@ -41,7 +41,7 @@ docker pull mysql:8.0
 
 ---
 
-## ⚙️ Requisitos de Instalación y Ejecución
+## Requisitos de Instalación y Ejecución
 
 - **Docker Desktop** (en Windows/macOS) o **Docker Engine** y **Docker Compose** (en Linux).
 - Git instalado.
@@ -52,7 +52,7 @@ docker pull mysql:8.0
 
 ---
 
-## 🚀 Cómo Ejecutar la Aplicación
+## Cómo Ejecutar la Aplicación
 
 ### 1. Iniciar todos los servicios
 Desde la raíz del repositorio, ejecuta:
@@ -86,7 +86,7 @@ docker compose down
 
 ---
 
-## 🔑 Credenciales de Prueba
+## Credenciales de Prueba
 
 | Rol | Correo Electrónico | Contraseña |
 |---|---|---|
@@ -94,7 +94,7 @@ docker compose down
 
 ---
 
-## 🧪 Flujo Completo de Prueba y Verificación E2E
+## Flujo Completo de Prueba y Verificación E2E
 
 Para verificar la comunicación entre los tres componentes (**Frontend ↔ Backend ↔ Base de Datos**) y correr la suite de pruebas automatizadas, consulta la guía detallada en: **[FLUJO_DE_PRUEBA.md](./FLUJO_DE_PRUEBA.md)**
 
@@ -110,7 +110,7 @@ docker compose --profile testing run playwright
 
 ---
 
-## 📂 Estructura del Monorepo
+## Estructura del Monorepo
 
 ```text
 cineapp-docker/
@@ -141,7 +141,7 @@ cineapp-docker/
 
 ---
 
-## 🔗 Repositorios
+## Repositorios
 
 | Repositorio | Descripción |
 |---|---|
