@@ -19,53 +19,49 @@ INSERT INTO region (id, nombre, codigo) VALUES
 (16,'Bélgica','BE'),
 (17,'Portugal','PT');
 
--- Usuario inicial (contraseña: admin123)
-INSERT INTO usuario (nombre, apellido, correo, contrasena, region_id) VALUES
-('Admin', 'CineApp', 'admin@cineapp.com', '$2b$12$Kf47AgmA1mPlnhRTv/3N/efAynKv11h4dCEZjnWeo8Y03wjBlqOGe', 1);
-
 INSERT INTO contenido
 (id,titulo,descripcion,categoria,ruta_portada,ruta_video,duracion,anio,creado_en)
 VALUES
 
-(1,'Interstellar','Viaje espacial para salvar la humanidad.','Ciencia Ficción','interstellar.jpg','interstellar.mp4',169,2014,NOW()),
+(1,'Interstellar','Viaje espacial para salvar la humanidad.','Ciencia Ficción','interstellar.jpeg','interstellar.mp4',169,2014,NOW()),
 
-(2,'Parasite','Familia pobre se infiltra en una familia rica.','Drama','parasite.jpg','parasite.mp4',132,2019,NOW()),
+(2,'Parasite','Familia pobre se infiltra en una familia rica.','Drama','parasite.jpeg','parasite.mp4',132,2019,NOW()),
 
-(3,'Mad Max: Fury Road','Acción en un mundo postapocalíptico.','Acción','madmax.jpg','madmax.mp4',120,2015,NOW()),
+(3,'Mad Max: Fury Road','Acción en un mundo postapocalíptico.','Acción','mad_max.jpeg','mad_max_fury_road.mp4',120,2015,NOW()),
 
-(4,'El Laberinto del Fauno','Fantasía durante la guerra española.','Terror','fauno.jpg','fauno.mp4',118,2006,NOW()),
+(4,'El Laberinto del Fauno','Fantasía durante la guerra española.','Terror','el_laberinto_del_fauno.jpeg','el_laberinto_del_fauno.mp4',118,2006,NOW()),
 
-(5,'Superbad','Comedia estudiantil.','Comedia','superbad.jpg','superbad.mp4',113,2007,NOW()),
+(5,'Superbad','Comedia estudiantil.','Comedia','superbad.jpeg','superbad.mp4',113,2007,NOW()),
 
-(6,'Roma','Drama mexicano.','Drama','roma.jpg','roma.mp4',135,2018,NOW()),
+(6,'Roma','Drama mexicano.','Drama','roma.jpeg','roma.mp4',135,2018,NOW()),
 
-(7,'The Raid','Operación policial en Indonesia.','Acción','raid.jpg','raid.mp4',101,2011,NOW()),
+(7,'The Raid','Operación policial en Indonesia.','Acción','the_raid_redemption.jpeg','the_raid.mp4',101,2011,NOW()),
 
-(8,'REC','Película de terror española.','Terror','rec.jpg','rec.mp4',78,2007,NOW()),
+(8,'REC','Película de terror española.','Terror','rec.jpeg','rec.mp4',78,2007,NOW()),
 
-(9,'Relatos Salvajes','Historias de humor negro.','Comedia','relatos.jpg','relatos.mp4',122,2014,NOW()),
+(9,'Relatos Salvajes','Historias de humor negro.','Comedia','relatos_salvajes.jpeg','relatos_salvajes.mp4',122,2014,NOW()),
 
-(10,'Train to Busan','Supervivencia durante un brote zombie.','Acción','busan.jpg','busan.mp4',118,2016,NOW()),
+(10,'Train to Busan','Supervivencia durante un brote zombie.','Acción','train_to_busan.jpeg','train_to_busan.mp4',118,2016,NOW()),
 
-(11,'La Llorona','Película guatemalteca de terror.','Terror','llorona.jpg','llorona.mp4',97,2019,NOW()),
+(11,'La Llorona','Película guatemalteca de terror.','Terror','la_llorona.jpeg','la_llorona.mp4',97,2019,NOW()),
 
-(12,'Dune','La lucha por Arrakis.','Ciencia Ficción','dune.jpg','dune.mp4',155,2021,NOW()),
+(12,'Dune','La lucha por Arrakis.','Ciencia Ficción','dune.jpeg','dune.mp4',155,2021,NOW()),
 
-(13,'Cidade de Deus','Historia criminal en Brasil.','Drama','cidade.jpg','cidade.mp4',130,2002,NOW()),
+(13,'Cidade de Deus','Historia criminal en Brasil.','Drama','cidade_de_deus.jpeg','cidade_de_deus.mp4',130,2002,NOW()),
 
-(14,'Oldboy','Historia de venganza.','Acción','oldboy.jpg','oldboy.mp4',120,2003,NOW()),
+(14,'Oldboy','Historia de venganza.','Acción','oldboy.jpeg','oldboy.mp4',120,2003,NOW()),
 
-(15,'El Secreto de sus Ojos','Investigación policial argentina.','Drama','ojos.jpg','ojos.mp4',129,2009,NOW()),
+(15,'El Secreto de sus Ojos','Investigación policial argentina.','Drama','el_secreto_de_sus_ojos.jpeg','el_secreto_de_sus_ojos.mp4',129,2009,NOW()),
 
-(16,'Get Out','Terror psicológico.','Terror','getout.jpg','getout.mp4',104,2017,NOW()),
+(16,'Get Out','Terror psicológico.','Terror','get_out.jpeg','get_out.mp4',104,2017,NOW()),
 
-(17,'Intouchables','Comedia dramática francesa.','Comedia','intouchables.jpg','intouchables.mp4',112,2011,NOW()),
+(17,'Intouchables','Comedia dramática francesa.','Comedia','the_intouchables.jpeg','intouchables.mp4',112,2011,NOW()),
 
-(18,'Akira','Anime clásico japonés.','Ciencia Ficción','akira.jpg','akira.mp4',124,1988,NOW()),
+(18,'Akira','Anime clásico japonés.','Ciencia Ficción','akira.jpeg','akira.mp4',124,1988,NOW()),
 
-(19,'Tropa de Elite','Policía en Brasil.','Acción','tropa.jpg','tropa.mp4',115,2007,NOW()),
+(19,'Tropa de Elite','Policía en Brasil.','Acción','tropa_de_elite.jpeg','tropa_de_elite.mp4',115,2007,NOW()),
 
-(20,'El Orfanato','Terror español.','Terror','orfanato.jpg','orfanato.mp4',105,2007,NOW());
+(20,'El Orfanato','Terror español.','Terror','el_orfanato.jpeg','el_orfanato.mp4',105,2007,NOW());
 
 INSERT INTO contenido_region (contenido_id, region_id) VALUES
 
