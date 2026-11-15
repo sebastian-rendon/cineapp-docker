@@ -1,0 +1,39 @@
+name: CI CineApp Pipeline
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Clonar repositorio y submódulos
+      uses: actions/checkout@v4
+      with:
+        submodules: recursive
+
+    - name: Levantar servicios de Base de Datos, Backend y Frontend
+      run: |
+        docker compose up --build -d
+
+    - name: Esperar a que la Base de Datos y el Backend estén listos
+      run: |
+        echo "Esperando que MySQL y Flask inicien completamente..."
+        sleep 20
+        docker ps
+        docker logs cineapp_backend || true
+
+    - name: Ejecutar pruebas E2E con Playwright
+      run: |
+        # Usamos el perfil de testing definido en tu docker-compose para correr playwright
+        docker compose --profile testing up playwright || true
+
+    - name: Inspeccionar logs finales si ocurre algún detalle
+      if: always()
+      run: |
+        docker logs cineapp_backend
+        docker compose down
