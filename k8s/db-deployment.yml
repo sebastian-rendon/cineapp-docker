@@ -1,3 +1,115 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mysql-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-init-scripts
+data:
+  01_schema.sql: |
+    CREATE DATABASE IF NOT EXISTS ott_mvp;
+    USE ott_mvp;
+
+    CREATE TABLE region (
+        id INT PRIMARY KEY AUTO_INCREMENT,
+        nombre VARCHAR(100) NOT NULL,
+        codigo VARCHAR(10) NOT NULL UNIQUE
+    );
+
+    CREATE TABLE usuario (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        nombre VARCHAR(100) NOT NULL,
+        apellido VARCHAR(100) NOT NULL,
+        correo VARCHAR(150) NOT NULL UNIQUE,
+        contrasena VARCHAR(255) NOT NULL,
+        region_id INT NOT NULL,
+        FOREIGN KEY (region_id) REFERENCES region(id)
+    );
+
+    CREATE TABLE tarjeta (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        usuario_id INT NOT NULL,
+        numero VARCHAR(20) NOT NULL,
+        nombre VARCHAR(100) NOT NULL,
+        vencimiento VARCHAR(7) NOT NULL,
+        FOREIGN KEY (usuario_id) REFERENCES usuario(id)
+    );
+
+    CREATE TABLE contenido (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        titulo VARCHAR(200) NOT NULL,
+        descripcion TEXT NOT NULL,
+        categoria VARCHAR(50) NOT NULL,
+        ruta_portada VARCHAR(500) NOT NULL,
+        ruta_video VARCHAR(500) NOT NULL,
+        duracion INT NOT NULL,
+        anio INT NOT NULL,
+        creado_en DATETIME DEFAULT CURRENT_TIMESTAMP
+    );
+
+    CREATE TABLE contenido_region (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        contenido_id INT NOT NULL,
+        region_id INT NOT NULL,
+        FOREIGN KEY (contenido_id) REFERENCES contenido(id),
+        FOREIGN KEY (region_id) REFERENCES region(id)
+    );
+
+    CREATE TABLE favorito (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        usuario_id INT NOT NULL,
+        contenido_id INT NOT NULL,
+        FOREIGN KEY (usuario_id) REFERENCES usuario(id),
+        FOREIGN KEY (contenido_id) REFERENCES contenido(id)
+    );
+
+    CREATE TABLE dislike (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        usuario_id INT NOT NULL,
+        contenido_id INT NOT NULL,
+        FOREIGN KEY (usuario_id) REFERENCES usuario(id),
+        FOREIGN KEY (contenido_id) REFERENCES contenido(id)
+    );
+
+    CREATE TABLE historial_reproduccion (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        usuario_id INT NOT NULL,
+        contenido_id INT NOT NULL,
+        progreso_segundos INT NOT NULL DEFAULT 0,
+        ultima_vez DATETIME DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (usuario_id) REFERENCES usuario(id),
+        FOREIGN KEY (contenido_id) REFERENCES contenido(id)
+    );
+
+    CREATE TABLE sesion (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        usuario_id INT NOT NULL,
+        token TEXT NOT NULL,
+        expira_en DATETIME NOT NULL,
+        creado_en DATETIME DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (usuario_id) REFERENCES usuario(id)
+    );
+  02_seed.sql: |
+    USE ott_mvp;
+
+    INSERT INTO region (id, nombre, codigo) VALUES
+    (1,'Colombia','CO'),(2,'Estados Unidos','US'),(3,'México','MX'),(4,'España','ES'),
+    (5,'Argentina','AR'),(6,'Corea del Sur','KR'),(7,'Reino Unido','GB'),(8,'Australia','AU'),
+    (9,'Canadá','CA'),(10,'Chile','CL'),(11,'Brasil','BR'),(12,'Guatemala','GT'),
+    (13,'Indonesia','ID'),(14,'Japón','JP'),(15,'Francia','FR'),(16,'Bélgica','BE'),(17,'Portugal','PT');
+
+    INSERT INTO contenido (id,titulo,descripcion,categoria,ruta_portada,ruta_video,duracion,anio,creado_en) VALUES
+    (1,'Interstellar','Viaje espacial para salvar la humanidad.','Ciencia Ficción','interstellar.jpeg','interstellar.mp4',169,2014,NOW()),
+    (2,'Parasite','Familia pobre se infiltra en una familia rica.','Drama','parasite.jpeg','parasite.mp4',132,2019,NOW());
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -22,6 +134,18 @@ spec:
           value: "ott_mvp"
         ports:
         - containerPort: 3306
+        volumeMounts:
+        - name: mysql-data
+          mountPath: /var/lib/mysql
+        - name: init-scripts
+          mountPath: /docker-entrypoint-initdb.d
+      volumes:
+      - name: mysql-data
+        persistentVolumeClaim:
+          claimName: mysql-pvc
+      - name: init-scripts
+        configMap:
+          name: mysql-init-scripts
 ---
 apiVersion: v1
 kind: Service

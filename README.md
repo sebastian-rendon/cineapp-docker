@@ -22,7 +22,7 @@ Repositorio de despliegue, integración continua y desarrollo monorepo de la pla
 
 ### Opción 1: Clonar el Repositorio con submódulos (Código fuente y despliegue)
 ```bash
-git clone --recurse-submodules https://github.com/sebastian-rendon/cineapp-docker.git
+git clone --recurse-submodules [https://github.com/sebastian-rendon/cineapp-docker.git](https://github.com/sebastian-rendon/cineapp-docker.git)
 cd cineapp-docker
 ```
 
@@ -74,28 +74,12 @@ kubectl apply -f k8s/
 kubectl get pods
 ```
 
-4. **Inicializar y poblar la Base de Datos:**
-
-   * **Para Windows (PowerShell):**
-     ```powershell
-     Get-Content ./init/01_schema.sql -Raw | kubectl exec -i deployment/mysql -- mysql -u root -pcineapp2026 ott_mvp
-     Get-Content ./init/02_seed.sql -Raw | kubectl exec -i deployment/mysql -- mysql -u root -pcineapp2026 ott_mvp
-     ```
-
-   * **Para Linux / macOS / Git Bash:**
-     ```bash
-     kubectl exec -i deployment/mysql -- mysql -u root -pcineapp2026 ott_mvp < ./init/01_schema.sql
-     kubectl exec -i deployment/mysql -- mysql -u root -pcineapp2026 ott_mvp < ./init/02_seed.sql
-     ```
-
-   > **Verificación:** La consola terminará de ejecutarse sin errores, aplicando la estructura de tablas y los datos iniciales sobre la base de datos `ott_mvp`.
-
-5. **Abrir la aplicación en el navegador (túnel de servicio):**
+4. **Abrir la aplicación en el navegador (túnel de servicio):**
 ```bash
 minikube service frontend
 ```
 
-6. **Eliminar los recursos del clúster (al finalizar):**
+5. **Eliminar los recursos del clúster (al finalizar):**
 ```bash
 kubectl delete -f k8s/
 ```
