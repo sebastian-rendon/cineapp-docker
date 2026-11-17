@@ -22,7 +22,7 @@ Repositorio de despliegue, integración continua y desarrollo monorepo de la pla
 
 ### Opción 1: Clonar el Repositorio con submódulos (Código fuente y despliegue)
 ```bash
-git clone --recurse-submodules [https://github.com/sebastian-rendon/cineapp-docker.git](https://github.com/sebastian-rendon/cineapp-docker.git)
+git clone --recurse-submodules https://github.com/sebastian-rendon/cineapp-docker.git
 cd cineapp-docker
 ```
 
